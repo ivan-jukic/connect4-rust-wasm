@@ -1,0 +1,8 @@
+{
+    "checks": {
+        "ExposeAll": false,
+        "ImportAll": false,
+        "TriggerWords": false,
+        "SingleFieldRecord": false
+    }
+}

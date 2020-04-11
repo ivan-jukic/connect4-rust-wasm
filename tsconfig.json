@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "strict": true,
+        "esModuleInterop": true,
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "noUnusedLocals": true,
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": true,
+        "strictNullChecks": true
+    },
+    "files": [
+        "src/ts/index.ts"
+    ],
+    "include": [
+        "src/ts/**/*"
+    ],
+    "exclude": [
+        "src/rust/**/*",
+        "src/elm/**/*",
+        "src/style/**/*",
+        "assets/**/*",
+        "node_modules",
+        "dist"
+    ]
+}
