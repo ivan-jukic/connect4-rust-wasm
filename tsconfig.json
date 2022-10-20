@@ -14,17 +14,18 @@
         "strictNullChecks": true
     },
     "files": [
-        "src/ts/index.ts"
+        "connect4-ui/ts/index.ts"
     ],
     "include": [
-        "src/ts/**/*"
+        "connect4-ui/ts/**/*"
     ],
     "exclude": [
-        "src/rust/**/*",
-        "src/elm/**/*",
-        "src/style/**/*",
-        "assets/**/*",
+        "apps/connect4-wasm/**/*",
+        "connect4-ui/src/**/*",
+        "connect4-ui/style/**/*",
+        "connect4-ui/assets/**/*",
         "node_modules",
-        "dist"
+        "elm-stuff",
+        "dist",
     ]
 }

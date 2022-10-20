@@ -8,32 +8,6 @@ export type Maybe<T> = T | undefined | null;
 
 
 /**
- * Check that a value is not nothing. Not exported.
- * 
- * @param maybe - value that we'd like to check
- * @returns true | false
- */ 
-function _check<T>(maybe: Maybe<T>): Boolean {
-    return undefined != maybe && null != maybe;
-}
-
-
-/**
- * Initialise Maybe with value, throws error if value is "nothing".
- * 
- * @param value - value to init as Just
- * @returns well, the value... but what matters here is the check and type!
- */
-export function Just<T>(value: T): Maybe<T> {
-    if(!_check(value)) {
-        throw Error("Provided value cannot be Just!");
-    }
-
-    return value;
-}
-
-
-/**
  * Initialise maybe with "nothing".
  * 
  * @returns null, which is interpreted as Nothing.

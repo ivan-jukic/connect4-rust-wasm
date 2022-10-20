@@ -5,12 +5,12 @@ module Content exposing
     , init
     , initHomePage
     , initNotFoundPage
+    , subs
     , update
     , view
     )
 
-import Html exposing (Html, div)
-import Html.Attributes exposing (class)
+import Html exposing (Html)
 import Page.Home as HomePage
 import Page.NotFound as NotFoundPage
 
@@ -45,6 +45,16 @@ initNotFoundPage model =
     { model | content = ContentNotFound }
 
 
+subs : Model -> Sub Msg
+subs model =
+    case model.content of
+        ContentHome m ->
+            Sub.map HomePageMsg (HomePage.subs m)
+
+        _ ->
+            Sub.none
+
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case ( msg, model.content ) of
@@ -63,12 +73,10 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [ class "content" ]
-        [ case model.content of
-            ContentHome m ->
-                Html.map HomePageMsg <|
-                    HomePage.view m
+    case model.content of
+        ContentHome m ->
+            Html.map HomePageMsg <|
+                HomePage.view m
 
-            ContentNotFound ->
-                NotFoundPage.view
-        ]
+        ContentNotFound ->
+            NotFoundPage.view

@@ -69,7 +69,7 @@ fn minimax_run(game: &Connect4, procedure: Procedure, depth: u8) -> (u8, i8) {
                 [] => default_res,
                 [res] => res.clone(),
                 _ => {
-                    let selected_idx = rand::thread_rng().gen_range(0, possible_moves.len());
+                    let selected_idx = rand::thread_rng().gen_range(0..possible_moves.len());
                     match possible_moves.get(selected_idx) {
                         Option::Some(&val) => val,
                         Option::None => default_res,
@@ -124,7 +124,7 @@ fn get_current_move_weight(game: &Connect4, procedure: &Procedure, depth: &u8) -
 
 #[test]
 fn ai_should_play_col_3() {
-    let mut game = Connect4::init_vs_ai(Difficulty::Test);
+    let mut game = Connect4::init_vs_ai(Difficulty::Normal);
 
     game.drop_token_in_col(3);
     game.drop_token_in_col(3);
@@ -135,7 +135,7 @@ fn ai_should_play_col_3() {
 
 #[test]
 fn ai_should_play_col_1_or_5() {
-    let mut game = Connect4::init_vs_ai(Difficulty::Test);
+    let mut game = Connect4::init_vs_ai(Difficulty::Normal);
 
     game.drop_token_in_col(2);
     game.drop_token_in_col(3);
@@ -147,7 +147,7 @@ fn ai_should_play_col_1_or_5() {
 
 #[test]
 fn ai_should_play_col_4() {
-    let mut game = Connect4::init_vs_ai(Difficulty::Test);
+    let mut game = Connect4::init_vs_ai(Difficulty::Normal);
 
     game.drop_token_in_col(5);
     game.drop_token_in_col(6);

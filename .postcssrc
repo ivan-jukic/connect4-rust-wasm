@@ -1,0 +1,8 @@
+{
+  "plugins": {
+    "postcss-import": {},
+    "postcss-each": {},
+    "postcss-mixins": {},
+    "postcss-nested": {}
+  }
+}

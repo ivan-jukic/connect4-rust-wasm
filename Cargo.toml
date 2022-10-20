@@ -1,23 +1,8 @@
-[package]
-name = "connect4"
-version = "0.2.0"
-authors = ["Ivan Jukic <jukic@arrival.com>"]
-edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[lib]
-name = "connect4"
-path = "src/rust/lib.rs"
-crate-type = ["cdylib", "rlib"]
-
-[dependencies]
-rand = "0.7.3"
-wasm-bindgen = "0.2.60"
-
-[dev-dependencies]
-wasm-bindgen-test = "0.3.10"
+[workspace]
+members = ["connect4-wasm"]
 
 [profile.release]
-# Tell `rustc` to optimize for small code size.
-opt-level = "s"
+strip = true        # Automatically strip symbols from the binary.
+opt-level = "z"     # Optimize for size.
+lto = true          # Link time optimization.
+codegen-units = 1   # Allow for maximum size reduction optimizations.

@@ -15,15 +15,6 @@ pub enum MovePlayed {
     NotPlayed,
 }
 
-fn move_played_to_symbol(move_played: &MovePlayed) -> char {
-    match move_played {
-        MovePlayed::NotPlayed => ' ',
-        MovePlayed::Played(Player::One) => 'x',
-        MovePlayed::Played(Player::Two) => 'o',
-        MovePlayed::Played(Player::AI) => 'ô',
-    }
-}
-
 /// Indicates success or failure when we try to drop a token
 #[derive(Debug, PartialEq)]
 pub enum MoveSuccess {
@@ -52,6 +43,27 @@ impl Board {
         Board {
             board_state: vec![vec![MovePlayed::NotPlayed; ROW_NUM as usize]; COL_NUM as usize],
         }
+    }
+
+    /// Initialises board from an input! TODO add a test!
+    pub fn init_from(str_board: Vec<Vec<String>>) -> Board {
+        str_board
+            .iter()
+            .enumerate()
+            .fold(Board::init(), |board, (i, col)| {
+                col.iter().enumerate().fold(board, |mut curr, (j, val)| {
+                    curr.board_state[i][j] = match val.as_str() {
+                        "player" => MovePlayed::Played(Player::One),
+                        "ai" => MovePlayed::Played(Player::AI),
+                        _ => MovePlayed::NotPlayed,
+                    };
+                    curr
+                })
+            })
+    }
+
+    pub fn get_board_state(self) -> BoardState {
+        self.board_state
     }
 
     /// Method to check if a token can be dropped in a column.
@@ -126,22 +138,6 @@ impl Board {
             }
             Option::None => MoveSuccess::UnknownColumn,
         }
-    }
-
-    pub fn print_board(&self) {
-        // TODO Perhaps there's a more FP approach to this?
-        for i in (0..ROW_NUM as usize).rev() {
-            print!("|");
-            for j in 0..COL_NUM as usize {
-                // Board state is actually represented as columns first!
-                print!(" {} |", move_played_to_symbol(&self.board_state[j][i]))
-            }
-            println!();
-        }
-
-        print!(" ");
-        (1..COL_NUM + 1).for_each(|n| print!(" {}  ", n));
-        println!();
     }
 }
 

@@ -1,12 +1,11 @@
-# Config and cache folders
-.vscode
-.cache
-
-# Other persistent folders
-/dist
+/.cache
+/.parcel-cache
+/.idea
+/.vagrant
+/.vscode
+/.build-ui
+/.build-wasm
 /target
 /node_modules
 /elm-stuff
-
-# Backup files(?)
-**/*.rs.bk
+*.log

@@ -3,8 +3,7 @@ module Main exposing (main)
 import Browser exposing (Document, UrlRequest(..))
 import Browser.Navigation as Navigation exposing (Key)
 import Content
-import Html exposing (div)
-import Html.Attributes exposing (class)
+import Html
 import Routes exposing (Route(..), parseUrl)
 import Url exposing (Url)
 
@@ -15,7 +14,7 @@ main =
         { init = init
         , view = view
         , update = update
-        , subscriptions = always Sub.none
+        , subscriptions = subs
         , onUrlRequest = OnUrlRequest
         , onUrlChange = OnUrlChange
         }
@@ -46,6 +45,12 @@ init _ initialUrl navigationKey =
       }
     , Cmd.none
     )
+
+
+subs : Model -> Sub Msg
+subs model =
+    Sub.map ContentMsg <|
+        Content.subs model.content
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -100,10 +105,7 @@ view : Model -> Document Msg
 view model =
     { title = "Connect4"
     , body =
-        [ div
-            [ class "app" ]
-            [ Html.map ContentMsg <|
-                Content.view model.content
-            ]
+        [ Html.map ContentMsg <|
+            Content.view model.content
         ]
     }
